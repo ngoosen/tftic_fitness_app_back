@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { Exercise } from './exercise/exercise.entity';
 
 @Module({
   imports: [
@@ -20,7 +21,7 @@ import { AppService } from './app.service';
       entities: [__dirname + "/**/*.entity{.ts,.js}"],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([]),
+    TypeOrmModule.forFeature([Exercise]),
   ],
   controllers: [AppController],
   providers: [AppService],
