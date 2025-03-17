@@ -11,6 +11,6 @@ export class Exercise {
   @Column()
   image: string;
 
-  @Column()
+  @Column({ type: "nvarchar", length: 1000, })
   description: string;
 }
