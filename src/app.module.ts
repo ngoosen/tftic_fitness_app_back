@@ -1,17 +1,20 @@
-import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { ExerciseController } from './exercise/exercise.controller';
-import { Exercise } from './exercise/exercise.entity';
-import { ExerciseService } from './exercise/exercise.service';
-import { MeasureController } from './measure/measure.controller';
-import { Measure } from './measure/measure.entity';
-import { MeasureService } from './measure/measure.service';
-import { UserController } from './user/user.controller';
-import { User } from './user/user.entity';
-import { UserService } from './user/user.service';
+import { Module } from "@nestjs/common";
+import { ConfigModule } from "@nestjs/config";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { AppController } from "./app.controller";
+import { AppService } from "./app.service";
+import { ExerciseController } from "./exercise/exercise.controller";
+import { Exercise } from "./exercise/exercise.entity";
+import { ExerciseService } from "./exercise/exercise.service";
+import { MeasureController } from "./measure/measure.controller";
+import { Measure } from "./measure/measure.entity";
+import { MeasureService } from "./measure/measure.service";
+import { TrainingSessionController } from "./training-session/training-session.controller";
+import { TrainingSession } from "./training-session/training-session.entity";
+import { TrainingSessionService } from "./training-session/training-session.service";
+import { UserController } from "./user/user.controller";
+import { User } from "./user/user.entity";
+import { UserService } from "./user/user.service";
 
 @Module({
   imports: [
@@ -29,13 +32,21 @@ import { UserService } from './user/user.service';
       entities: [__dirname + "/**/*.entity{.ts,.js}"],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([
-      Exercise,
-      Measure,
-      User,
-    ]),
+    TypeOrmModule.forFeature([Exercise, Measure, User, TrainingSession]),
   ],
-  controllers: [AppController, ExerciseController, MeasureController, UserController],
-  providers: [AppService, ExerciseService, MeasureService, UserService],
+  controllers: [
+    AppController,
+    ExerciseController,
+    MeasureController,
+    UserController,
+    TrainingSessionController,
+  ],
+  providers: [
+    AppService,
+    ExerciseService,
+    MeasureService,
+    UserService,
+    TrainingSessionService,
+  ],
 })
 export class AppModule {}
