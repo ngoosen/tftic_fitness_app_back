@@ -1,5 +1,7 @@
 import { Measure } from "src/measure/measure.entity";
-import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { TrainingSessionToExercise } from "src/training-session-exercise/training-session-exercise.entity";
+import { TrainingSession } from "src/training-session/training-session.entity";
+import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Exercise {
@@ -18,4 +20,7 @@ export class Exercise {
   @ManyToMany(() => Measure)
   @JoinTable()
   trackable_measures: Measure[]
+
+  @OneToMany(() => TrainingSessionToExercise, (t2s) => t2s.exercise)
+  training_sessions: TrainingSession[];
 }
