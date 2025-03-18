@@ -1,4 +1,4 @@
-import { IsDateString, IsNotEmpty, IsOptional, IsString } from "class-validator";
+import { IsDateString, IsNotEmpty, IsOptional, IsString, IsUUID } from "class-validator";
 
 export class CreateTrainingSessionDTO {
   @IsNotEmpty()
@@ -12,4 +12,9 @@ export class CreateTrainingSessionDTO {
   @IsOptional()
   @IsString()
   description: string;
+
+  @IsNotEmpty()
+  @IsString()
+  @IsUUID()
+  user: string;
 }

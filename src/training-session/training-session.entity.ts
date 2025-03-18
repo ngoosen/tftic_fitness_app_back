@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { User } from "src/user/user.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class TrainingSession {
@@ -13,4 +14,7 @@ export class TrainingSession {
 
   @Column({ type: "nvarchar", length: 500, })
   description: string;
+
+  @ManyToOne(() => User, (user) => user.trainingSessions, { onDelete: "CASCADE", })
+  user: User;
 }

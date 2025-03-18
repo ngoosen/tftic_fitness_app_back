@@ -7,14 +7,14 @@ import { TrainingSessionService } from './training-session.service';
 export class TrainingSessionController {
   constructor (private _trainingSessionService: TrainingSessionService) { }
 
-  @Get()
-  async getAll() {
-    return this._trainingSessionService.getAll();
+  @Get("/:userId")
+  async getAll(@Param("userId") userId: string) {
+    return this._trainingSessionService.getAll(userId);
   }
 
-  @Get("/:id")
-  async getById(@Param("id") id: string) {
-    return this._trainingSessionService.getById(id);
+  @Get("/:userId/:id")
+  async getById(@Param("userId") userId: string, @Param("id") id: string) {
+    return this._trainingSessionService.getById(userId, id);
   }
 
   @Post()
@@ -27,8 +27,8 @@ export class TrainingSessionController {
     return this._trainingSessionService.updateById(id, body);
   }
 
-  @Delete("/:id")
-  async deleteById(@Param("id") id: string) {
-    return this._trainingSessionService.deleteById(id);
+  @Delete("/:userId/:id")
+  async deleteById(@Param("userId") userId: string, @Param("id") id: string) {
+    return this._trainingSessionService.deleteById(userId, id);
   }
 }

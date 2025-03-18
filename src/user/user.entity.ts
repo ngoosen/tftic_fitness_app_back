@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { TrainingSession } from "src/training-session/training-session.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class User {
@@ -16,4 +17,7 @@ export class User {
 
   @Column({ default: false, })
   isAdmin: boolean = false;
+
+  @OneToMany(() => TrainingSession, (session) => session.user)
+  trainingSessions: TrainingSession[];
 }
