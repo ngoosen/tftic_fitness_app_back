@@ -16,6 +16,8 @@ import { TrainingSessionService } from "./training-session/training-session.serv
 import { UserController } from "./user/user.controller";
 import { User } from "./user/user.entity";
 import { UserService } from "./user/user.service";
+import { SeriesService } from './series/series.service';
+import { SeriesController } from './series/series.controller';
 
 @Module({
   imports: [
@@ -47,6 +49,7 @@ import { UserService } from "./user/user.service";
     MeasureController,
     UserController,
     TrainingSessionController,
+    SeriesController,
   ],
   providers: [
     AppService,
@@ -54,6 +57,7 @@ import { UserService } from "./user/user.service";
     MeasureService,
     UserService,
     TrainingSessionService,
+    SeriesService,
   ],
 })
 export class AppModule {}
