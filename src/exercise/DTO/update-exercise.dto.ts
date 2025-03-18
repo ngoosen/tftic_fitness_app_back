@@ -1,4 +1,4 @@
-import { IsOptional, IsString } from "class-validator";
+import { IsArray, IsOptional, IsString, IsUUID } from "class-validator";
 
 export class UpdateExerciseDTO {
   @IsString()
@@ -12,4 +12,9 @@ export class UpdateExerciseDTO {
   @IsString()
   @IsOptional()
   description: string;
+
+  @IsOptional()
+  @IsArray()
+  @IsUUID(undefined, { each: true })
+  trackable_measures: string[]
 }

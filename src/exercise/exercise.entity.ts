@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Measure } from "src/measure/measure.entity";
+import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Exercise {
@@ -13,4 +14,8 @@ export class Exercise {
 
   @Column({ type: "nvarchar", length: 1000, })
   description: string;
+
+  @ManyToMany(() => Measure)
+  @JoinTable()
+  trackable_measures: Measure[]
 }

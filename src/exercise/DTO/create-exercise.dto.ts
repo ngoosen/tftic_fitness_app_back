@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsOptional, IsString } from "class-validator";
+import { IsArray, IsNotEmpty, IsOptional, IsString, IsUUID } from "class-validator";
 
 export class CreateExerciseDTO {
   @IsNotEmpty()
@@ -12,4 +12,9 @@ export class CreateExerciseDTO {
   @IsOptional()
   @IsString()
   description: string;
+
+  @IsOptional()
+  @IsArray()
+  @IsUUID(undefined, { each: true })
+  trackable_measures: string[]
 }
