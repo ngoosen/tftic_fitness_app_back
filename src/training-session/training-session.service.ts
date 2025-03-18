@@ -14,7 +14,11 @@ export class TrainingSessionService {
   ) { }
 
   async getAll(userId: string) {
-    const user = await this._userRepo.findBy({ id: userId, });
+    const user = await this._userRepo.findOne({
+      where: {
+        id: userId,
+      }
+    });
 
     if (!user) {
       throw new NotFoundException("L'utilisateur n'existe pas");
@@ -31,7 +35,11 @@ export class TrainingSessionService {
   }
 
   async getById(userId: string, id: string) {
-    const user = await this._userRepo.findBy({ id: userId, });
+    const user = await this._userRepo.findOne({
+      where: {
+        id: userId,
+      }
+    });
 
     if (!user) {
       throw new NotFoundException("L'utilisateur n'existe pas");
