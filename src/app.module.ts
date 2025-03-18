@@ -3,9 +3,12 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ExerciseController } from './exercise/exercise.controller';
 import { Exercise } from './exercise/exercise.entity';
 import { ExerciseService } from './exercise/exercise.service';
-import { ExerciseController } from './exercise/exercise.controller';
+import { MeasureController } from './measure/measure.controller';
+import { Measure } from './measure/measure.entity';
+import { MeasureService } from './measure/measure.service';
 
 @Module({
   imports: [
@@ -23,9 +26,9 @@ import { ExerciseController } from './exercise/exercise.controller';
       entities: [__dirname + "/**/*.entity{.ts,.js}"],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([Exercise]),
+    TypeOrmModule.forFeature([Exercise, Measure]),
   ],
-  controllers: [AppController, ExerciseController],
-  providers: [AppService, ExerciseService],
+  controllers: [AppController, ExerciseController, MeasureController],
+  providers: [AppService, ExerciseService, MeasureService],
 })
 export class AppModule {}
