@@ -9,6 +9,7 @@ import { ExerciseService } from "./exercise/exercise.service";
 import { MeasureController } from "./measure/measure.controller";
 import { Measure } from "./measure/measure.entity";
 import { MeasureService } from "./measure/measure.service";
+import { Series } from "./series/series.entity";
 import { TrainingSessionController } from "./training-session/training-session.controller";
 import { TrainingSession } from "./training-session/training-session.entity";
 import { TrainingSessionService } from "./training-session/training-session.service";
@@ -32,7 +33,13 @@ import { UserService } from "./user/user.service";
       entities: [__dirname + "/**/*.entity{.ts,.js}"],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([Exercise, Measure, User, TrainingSession]),
+    TypeOrmModule.forFeature([
+      Exercise,
+      Measure,
+      User,
+      TrainingSession,
+      Series
+    ]),
   ],
   controllers: [
     AppController,
