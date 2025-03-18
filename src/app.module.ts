@@ -9,6 +9,9 @@ import { ExerciseService } from './exercise/exercise.service';
 import { MeasureController } from './measure/measure.controller';
 import { Measure } from './measure/measure.entity';
 import { MeasureService } from './measure/measure.service';
+import { UserController } from './user/user.controller';
+import { User } from './user/user.entity';
+import { UserService } from './user/user.service';
 
 @Module({
   imports: [
@@ -26,9 +29,13 @@ import { MeasureService } from './measure/measure.service';
       entities: [__dirname + "/**/*.entity{.ts,.js}"],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([Exercise, Measure]),
+    TypeOrmModule.forFeature([
+      Exercise,
+      Measure,
+      User,
+    ]),
   ],
-  controllers: [AppController, ExerciseController, MeasureController],
-  providers: [AppService, ExerciseService, MeasureService],
+  controllers: [AppController, ExerciseController, MeasureController, UserController],
+  providers: [AppService, ExerciseService, MeasureService, UserService],
 })
 export class AppModule {}
