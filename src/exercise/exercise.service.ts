@@ -22,7 +22,14 @@ export class ExerciseService {
   }
 
   getById(id: string) {
-    return this._exerciseRepo.findBy({ id, });
+    return this._exerciseRepo.findOne({
+      where: {
+        id,
+      },
+      relations: {
+        trackable_measures: true,
+      }
+    });
   }
 
   async create(exercise: CreateExerciseDTO) {
