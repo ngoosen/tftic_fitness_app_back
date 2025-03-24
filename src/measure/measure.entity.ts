@@ -8,6 +8,6 @@ export class Measure {
   @Column({ type: "nvarchar", length: 50, })
   measure_name: string;
 
-  @Column({ type: "nvarchar", length: 10, })
+  @Column({ type: "nvarchar", length: 10, nullable: true, })
   unit: string;
 }
