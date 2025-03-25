@@ -1,5 +1,7 @@
+import { Measure } from "src/measure/measure.entity";
+import { SeriesMeasure } from "src/series-measure/series-measure.entity";
 import { TrainingSessionToExercise } from "src/training-session-exercise/training-session-exercise.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Series {
@@ -11,4 +13,7 @@ export class Series {
 
   @ManyToOne(() => TrainingSessionToExercise, (t2s) => t2s.series)
   training_session_exercise: string;
+
+  @OneToMany(() => SeriesMeasure, (seriesMeasure) => seriesMeasure.series)
+  measures: Measure[];
 }
