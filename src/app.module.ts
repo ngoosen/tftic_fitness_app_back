@@ -9,15 +9,18 @@ import { ExerciseService } from "./exercise/exercise.service";
 import { MeasureController } from "./measure/measure.controller";
 import { Measure } from "./measure/measure.entity";
 import { MeasureService } from "./measure/measure.service";
+import { SeriesController } from './series/series.controller';
 import { Series } from "./series/series.entity";
+import { SeriesService } from './series/series.service';
+import { TrainingSessionExerciseController } from './training-session-exercise/training-session-exercise.controller';
+import { TrainingSessionToExercise } from "./training-session-exercise/training-session-exercise.entity";
+import { TrainingSessionExerciseService } from './training-session-exercise/training-session-exercise.service';
 import { TrainingSessionController } from "./training-session/training-session.controller";
 import { TrainingSession } from "./training-session/training-session.entity";
 import { TrainingSessionService } from "./training-session/training-session.service";
 import { UserController } from "./user/user.controller";
 import { User } from "./user/user.entity";
 import { UserService } from "./user/user.service";
-import { SeriesService } from './series/series.service';
-import { SeriesController } from './series/series.controller';
 
 @Module({
   imports: [
@@ -40,7 +43,8 @@ import { SeriesController } from './series/series.controller';
       Measure,
       User,
       TrainingSession,
-      Series
+      Series,
+      TrainingSessionToExercise,
     ]),
   ],
   controllers: [
@@ -50,6 +54,7 @@ import { SeriesController } from './series/series.controller';
     UserController,
     TrainingSessionController,
     SeriesController,
+    TrainingSessionExerciseController,
   ],
   providers: [
     AppService,
@@ -58,6 +63,7 @@ import { SeriesController } from './series/series.controller';
     UserService,
     TrainingSessionService,
     SeriesService,
+    TrainingSessionExerciseService,
   ],
 })
 export class AppModule {}
