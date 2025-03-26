@@ -25,7 +25,10 @@ export class TrainingSessionService {
     }
 
     return this._trainingSessionRepo.find({
-      relations: ["user"],
+      relations: {
+        user: true,
+        exercises: true,
+      },
       where: {
         user: {
           id: userId
@@ -45,7 +48,16 @@ export class TrainingSessionService {
       throw new NotFoundException("L'utilisateur n'existe pas");
     }
 
-    return this._trainingSessionRepo.findBy({ id, user: { id: userId, } });
+    return this._trainingSessionRepo.findOne({
+      where: {
+        id,
+        user,
+      },
+      relations: {
+        user: true,
+        exercises: true,
+      }
+    });
   }
 
   async create(trainingSession: CreateTrainingSessionDTO) {
