@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { CreateTrainingSessionExerciseDTO } from './DTO/create-training-session-exercise.dto';
 import { TrainingSessionExerciseService } from './training-session-exercise.service';
 
@@ -14,5 +14,10 @@ export class TrainingSessionExerciseController {
   @Post()
   async addExerciseToTrainingSession(@Body() body: CreateTrainingSessionExerciseDTO) {
     return this._t2eService.addExerciseToTrainingSession(body);
+  }
+
+  @Delete("/:id")
+  async deleteById(@Param("id") id: string) {
+    return this._t2eService.deleteById(id);
   }
 }

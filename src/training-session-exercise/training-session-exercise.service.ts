@@ -52,4 +52,8 @@ export class TrainingSessionExerciseService {
 
     return this._trainingToExerciseRepo.save(newTrainingToExercise);
   }
+
+  deleteById(id: string) {
+    return this._trainingToExerciseRepo.delete(id);
+  }
 }
