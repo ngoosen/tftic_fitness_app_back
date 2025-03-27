@@ -8,10 +8,14 @@ import { TrainingSessionToExercise } from './training-session-exercise.entity';
 @Injectable()
 export class TrainingSessionExerciseService {
   constructor (
-      @InjectRepository(TrainingSession) private _trainingSessionRepo: Repository<TrainingSession>,
-      @InjectRepository(Exercise) private _exerciseRepo: Repository<Exercise>,
-      @InjectRepository(TrainingSessionToExercise) private _trainingToExerciseRepo: Repository<TrainingSessionToExercise>,
-    ) { }
+    @InjectRepository(TrainingSession) private _trainingSessionRepo: Repository<TrainingSession>,
+    @InjectRepository(Exercise) private _exerciseRepo: Repository<Exercise>,
+    @InjectRepository(TrainingSessionToExercise) private _trainingToExerciseRepo: Repository<TrainingSessionToExercise>,
+  ) { }
+
+  async getAll() {
+    return this._trainingToExerciseRepo.find();
+  }
 
   async addExerciseToTrainingSession(trainingSessionId: string, exerciseId: string) {
     const session = await this._trainingSessionRepo.findOne({

@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsNumber, IsString, IsUUID } from "class-validator";
 
-export class CreateSeriesDto {
+export class CreateSeriesDTO {
   @IsNotEmpty()
   @IsNumber()
   reps: number;
