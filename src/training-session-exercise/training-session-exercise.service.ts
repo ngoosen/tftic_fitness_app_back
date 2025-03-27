@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Exercise } from 'src/exercise/exercise.entity';
 import { TrainingSession } from 'src/training-session/training-session.entity';
 import { Repository } from 'typeorm';
+import { CreateTrainingSessionExerciseDTO } from './DTO/create-training-session-exercise.dto';
 import { TrainingSessionToExercise } from './training-session-exercise.entity';
 
 @Injectable()
@@ -23,10 +24,10 @@ export class TrainingSessionExerciseService {
     });
   }
 
-  async addExerciseToTrainingSession(trainingSessionId: string, exerciseId: string) {
+  async addExerciseToTrainingSession(data: CreateTrainingSessionExerciseDTO) {
     const session = await this._trainingSessionRepo.findOne({
       where: {
-        id: trainingSessionId,
+        id: data.training_session_id,
       }
     });
 
@@ -36,7 +37,7 @@ export class TrainingSessionExerciseService {
 
     const exercise = await this._exerciseRepo.findOne({
       where: {
-        id: exerciseId,
+        id: data.exercise_id,
       }
     });
 
