@@ -12,8 +12,10 @@ export class SeriesService {
     @InjectRepository(TrainingSessionToExercise) private _trainingExerciseRepo: Repository<TrainingSessionToExercise>,
   ) { }
 
-  getAll() {
-    return this._seriesRepo.find();
+  async getAll() {
+    return this._seriesRepo.find({
+      relations: ["training_session_exercise", "measures"]
+    });
   }
 
   async create(series: CreateSeriesDTO) {

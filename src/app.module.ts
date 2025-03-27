@@ -9,6 +9,9 @@ import { ExerciseService } from "./exercise/exercise.service";
 import { MeasureController } from "./measure/measure.controller";
 import { Measure } from "./measure/measure.entity";
 import { MeasureService } from "./measure/measure.service";
+import { SeriesMeasureController } from './series-measure/series-measure.controller';
+import { SeriesMeasure } from "./series-measure/series-measure.entity";
+import { SeriesMeasureService } from './series-measure/series-measure.service';
 import { SeriesController } from './series/series.controller';
 import { Series } from "./series/series.entity";
 import { SeriesService } from './series/series.service';
@@ -45,6 +48,7 @@ import { UserService } from "./user/user.service";
       TrainingSession,
       Series,
       TrainingSessionToExercise,
+      SeriesMeasure,
     ]),
   ],
   controllers: [
@@ -55,6 +59,7 @@ import { UserService } from "./user/user.service";
     TrainingSessionController,
     SeriesController,
     TrainingSessionExerciseController,
+    SeriesMeasureController,
   ],
   providers: [
     AppService,
@@ -64,6 +69,7 @@ import { UserService } from "./user/user.service";
     TrainingSessionService,
     SeriesService,
     TrainingSessionExerciseService,
+    SeriesMeasureService,
   ],
 })
 export class AppModule {}
