@@ -32,4 +32,8 @@ export class SeriesService {
     const newSeries = this._seriesRepo.create(series);
     return this._seriesRepo.save(newSeries);
   }
+
+  deleteById(id: string) {
+    return this._seriesRepo.delete(id);
+  }
 }

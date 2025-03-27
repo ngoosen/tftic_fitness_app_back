@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { CreateSeriesMeasureDTO } from './DTO/create-series-measure.dto';
 import { SeriesMeasureService } from './series-measure.service';
 
@@ -14,5 +14,10 @@ export class SeriesMeasureController {
   @Post()
   async addMeasureToSeries(@Body() body: CreateSeriesMeasureDTO) {
     return this._seriesMeasureService.addMeasureToSeries(body);
+  }
+
+  @Delete("/:id")
+  async deleteById(@Param("id") id: string) {
+    return this._seriesMeasureService.deleteById(id);
   }
 }

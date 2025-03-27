@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { CreateSeriesDTO } from './DTO/create-series.dto';
 import { SeriesService } from './series.service';
 
@@ -14,5 +14,10 @@ export class SeriesController {
   @Post()
   async create(@Body() body: CreateSeriesDTO) {
     return this._seriesService.create(body);
+  }
+
+  @Delete("/:id")
+  async deleteById(@Param("id") id: string) {
+    return this._seriesService.deleteById(id);
   }
 }

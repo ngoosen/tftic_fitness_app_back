@@ -31,7 +31,7 @@ export class SeriesMeasureService {
     });
 
     if (!series) {
-      throw new NotFoundException("Aucune séries correspondant à l'id trouvée.");
+      throw new NotFoundException("Aucune série correspondant à l'id trouvée.");
     }
 
     const measure = await this._measureRepo.findOne({
@@ -51,5 +51,9 @@ export class SeriesMeasureService {
     });
 
     return this._seriesMeasureRepo.save(newSeriesMeasure);
+  }
+
+  deleteById(id: string) {
+    return this._seriesMeasureRepo.delete(id);
   }
 }
