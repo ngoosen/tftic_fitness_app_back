@@ -24,17 +24,22 @@ export class TrainingSessionService {
       throw new NotFoundException("L'utilisateur n'existe pas");
     }
 
-    return this._trainingSessionRepo.find({
-      relations: {
-        user: true,
-        exercises: true,
-      },
-      where: {
-        user: {
-          id: userId
-        },
-      }
-    });
+    return this._trainingSessionRepo
+      // FROM training_session ts
+      .createQueryBuilder("ts")
+      // INNER JOIN [user] u ON u.id = ts.userId
+      .innerJoinAndSelect("ts.user", "u", "u.id = ts.userId")
+      // INNER JOIN training_session_to_exercise t2e ON t2e.trainingSessionId = ts.id
+      .innerJoinAndSelect("ts.exercises", "t2e", "t2e.trainingSessionId = ts.id")
+      // INNER JOIN exercise e ON e.id = t2e.exerciseId
+      .innerJoinAndSelect("t2e.exercise", "e", "e.id = t2e.exerciseId")
+      // LEFT JOIN series s ON t2e.id = s.trainingSessionExerciseId
+      .leftJoinAndSelect("t2e.series", "s", "t2e.id = s.trainingSessionExerciseId")
+      // LEFT JOIN series_measure sm ON sm.seriesId = s.id
+      .leftJoinAndSelect("s.measures", "sm", "sm.seriesId = s.id")
+      // LEFT JOIN measure m ON m.id = sm.measureId
+      .leftJoinAndSelect("sm.measure", "m", "m.id = sm.measureId")
+      .getMany();
   }
 
   async getById(userId: string, id: string) {
