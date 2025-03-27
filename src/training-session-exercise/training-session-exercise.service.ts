@@ -14,7 +14,13 @@ export class TrainingSessionExerciseService {
   ) { }
 
   async getAll() {
-    return this._trainingToExerciseRepo.find();
+    return this._trainingToExerciseRepo.find({
+      relations: {
+        trainingSession: true,
+        exercise: true,
+        series: true,
+      }
+    });
   }
 
   async addExerciseToTrainingSession(trainingSessionId: string, exerciseId: string) {
