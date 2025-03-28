@@ -23,10 +23,15 @@ export class SeriesMeasureService {
     });
   }
 
-  async addMeasureToSeries(data: CreateSeriesMeasureDTO) {
+  async addMeasureToSeries(data: CreateSeriesMeasureDTO[]) {
+    if (data.length === 0) {
+      return;
+    }
+
+    const seriesId = data[0].series_id;
     const series = await this._seriesRepo.findOne({
       where: {
-        id: data.series_id,
+        id: seriesId,
       }
     });
 
@@ -34,23 +39,40 @@ export class SeriesMeasureService {
       throw new NotFoundException("Aucune série correspondant à l'id trouvée.");
     }
 
-    const measure = await this._measureRepo.findOne({
-      where: {
-        id: data.measure_id,
-      }
-    });
+    // const measure = await this._measureRepo.findOne({
+    //   where: {
+    //     id: data.measure_id,
+    //   }
+    // });
 
-    if (!measure) {
-      throw new NotFoundException("Aucune mesure correspondant à l'id trouvée.");
+    // if (!measure) {
+    //   throw new NotFoundException("Aucune mesure correspondant à l'id trouvée.");
+    // }
+
+    const result: SeriesMeasure[] = [];
+
+    for (let index = 0; index < data.length; index++) {
+      const measure = await this._measureRepo.findOne({
+        where: {
+          id: data[index].measure_id,
+        }
+      });
+
+      if (!measure) {
+        throw new NotFoundException("Aucune mesure correspondant à l'id trouvée.");
+      }
+
+      const newSeriesMeasure = this._seriesMeasureRepo.create({
+        series,
+        measure,
+        measure_quantity: data[index].measure_quantity,
+      });
+
+      const insertedValue = await this._seriesMeasureRepo.save(newSeriesMeasure);
+      result.push(insertedValue);
     }
 
-    const newSeriesMeasure = this._seriesMeasureRepo.create({
-      series,
-      measure,
-      measure_quantity: data.measure_quantity,
-    });
-
-    return this._seriesMeasureRepo.save(newSeriesMeasure);
+    return result;
   }
 
   deleteById(id: string) {

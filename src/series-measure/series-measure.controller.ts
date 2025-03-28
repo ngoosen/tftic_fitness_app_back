@@ -12,7 +12,7 @@ export class SeriesMeasureController {
   }
 
   @Post()
-  async addMeasureToSeries(@Body() body: CreateSeriesMeasureDTO) {
+  async addMeasureToSeries(@Body() body: CreateSeriesMeasureDTO[]) {
     return this._seriesMeasureService.addMeasureToSeries(body);
   }
 
