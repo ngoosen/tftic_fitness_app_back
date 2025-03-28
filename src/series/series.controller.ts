@@ -12,7 +12,7 @@ export class SeriesController {
   }
 
   @Post()
-  async create(@Body() body: CreateSeriesDTO) {
+  async create(@Body() body: CreateSeriesDTO[]) {
     return this._seriesService.create(body);
   }
 

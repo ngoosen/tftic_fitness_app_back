@@ -18,10 +18,15 @@ export class SeriesService {
     });
   }
 
-  async create(series: CreateSeriesDTO) {
+  async create(series: CreateSeriesDTO[]) {
+    if (series.length === 0) {
+      return;
+    }
+
+    const trainingSessionId = series[0].training_session_exercise;
     const trainingSession = await this._trainingExerciseRepo.findOne({
       where: {
-        id: series.training_session_exercise,
+        id: trainingSessionId,
       }
     });
 
@@ -29,8 +34,15 @@ export class SeriesService {
       throw new NotFoundException("Aucun entraînement correspondant à l'id trouvé.");
     }
 
-    const newSeries = this._seriesRepo.create(series);
-    return this._seriesRepo.save(newSeries);
+    const result: Series[] = [];
+
+    for (let index = 0; index < series.length; index++) {
+      const newSeries = this._seriesRepo.create(series[index]);
+      const insertedSeries = await this._seriesRepo.save(newSeries);
+      result.push(insertedSeries);
+    }
+
+    return result;
   }
 
   deleteById(id: string) {
