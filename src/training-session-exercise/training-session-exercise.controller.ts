@@ -12,6 +12,11 @@ export class TrainingSessionExerciseController {
     return this._t2eService.getAll();
   }
 
+  @Get("/:exerciseId")
+  async getByExercise(@Param("exerciseId") exerciseId: string) {
+    return this._t2eService.getByExercise(exerciseId);
+  }
+
   @Post()
   async addExerciseToTrainingSession(@Body() body: CreateTrainingSessionExerciseDTO) {
     return this._t2eService.addExerciseToTrainingSession(body);

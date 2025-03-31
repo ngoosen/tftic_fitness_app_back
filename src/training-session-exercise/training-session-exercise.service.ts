@@ -32,6 +32,24 @@ export class TrainingSessionExerciseService {
     });
   }
 
+  async getByExercise(exerciseId: string) {
+    const exercise = await this._exerciseRepo.findBy({ id: exerciseId, });
+
+    if (!exercise) {
+      throw new NotFoundException("Aucun exercice correspondant à l'id trouvé.");
+    }
+
+    return this._trainingToExerciseRepo
+      .createQueryBuilder("t2e")
+      .leftJoinAndSelect("t2e.trainingSession", "ts", "ts.id = t2e.trainingSessionId")
+      .leftJoinAndSelect("t2e.exercise", "e", "e.id = t2e.exerciseId")
+      .leftJoinAndSelect("t2e.series", "s", "t2e.id = s.trainingSessionExerciseId")
+      .leftJoinAndSelect("s.measures", "sm", "s.id = sm.seriesId")
+      .leftJoinAndSelect("sm.measure", "m", "m.id = sm.measureId")
+      .where(`e.id = '${exerciseId}'`)
+      .getMany();
+  }
+
   async addExerciseToTrainingSession(data: CreateTrainingSessionExerciseDTO) {
     const session = await this._trainingSessionRepo.findOne({
       where: {
