@@ -10,7 +10,7 @@ export class SeriesMeasure {
   @Column()
   measure_quantity: number;
 
-  @ManyToOne(() => Series, (series) => series.measures)
+  @ManyToOne(() => Series, (series) => series.measures, { onDelete: "CASCADE", })
   series: Series;
 
   @ManyToOne(() => Measure, (measure) => measure.series)

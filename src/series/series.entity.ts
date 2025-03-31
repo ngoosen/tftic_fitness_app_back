@@ -11,7 +11,7 @@ export class Series {
   @Column()
   reps: number;
 
-  @ManyToOne(() => TrainingSessionToExercise, (t2s) => t2s.series)
+  @ManyToOne(() => TrainingSessionToExercise, (t2s) => t2s.series, { onDelete: "CASCADE", })
   training_session_exercise: string;
 
   @OneToMany(() => SeriesMeasure, (seriesMeasure) => seriesMeasure.series)
