@@ -11,7 +11,7 @@ export class TrainingSessionToExercise {
   @ManyToOne(() => Exercise, (exercise) => exercise.training_sessions)
   exercise: Exercise;
 
-  @ManyToOne(() => TrainingSession, (trainingSession) => trainingSession.exercises)
+  @ManyToOne(() => TrainingSession, (trainingSession) => trainingSession.exercises, { onDelete: "CASCADE", })
   trainingSession: TrainingSession;
 
   @OneToMany(() => Series, (series) => series.training_session_exercise)
