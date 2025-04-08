@@ -24,6 +24,7 @@ import { TrainingSessionService } from "./training-session/training-session.serv
 import { UserController } from "./user/user.controller";
 import { User } from "./user/user.entity";
 import { UserService } from "./user/user.service";
+import { AuthenticationService } from './user/authentication/authentication.service';
 
 @Module({
   imports: [
@@ -70,6 +71,7 @@ import { UserService } from "./user/user.service";
     SeriesService,
     TrainingSessionExerciseService,
     SeriesMeasureService,
+    AuthenticationService,
   ],
 })
 export class AppModule {}
