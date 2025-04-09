@@ -21,6 +21,10 @@ export class UserService {
     return this._userRepo.findBy({ email, });
   }
 
+  getByUsername(username: string) {
+    return this._userRepo.findBy({ username, });
+  }
+
   create(user: CreateUserDTO) {
     const newUser = this._userRepo.create(user);
     return this._userRepo.save(newUser);

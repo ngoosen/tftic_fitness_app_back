@@ -12,10 +12,16 @@ export class AuthenticationService {
   constructor (private _userService: UserService) {}
 
   async create(user: CreateUserDTO) {
-    const existingUser = await this._userService.getByEmail(user.email);
+    let existingUser = await this._userService.getByEmail(user.email);
 
     if (existingUser.length > 0) {
       throw new BadRequestException("L'email fourni est déjà associé à un compte.");
+    } else {
+      existingUser = await this._userService.getByUsername(user.username);
+
+      if (existingUser.length > 0) {
+        throw new BadRequestException("Le nom d'utilisateur fourni est déjà associé à un compte.");
+      }
     }
 
     const salt = randomBytes(8).toString("hex");
